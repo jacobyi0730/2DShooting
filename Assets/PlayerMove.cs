@@ -20,7 +20,7 @@ public class PlayerMove : MonoBehaviour
         // 1. 사용자의 입력에따라
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
-        print(h + ", " + v);
+        //print(h + ", " + v);
         // 2. 상하좌우로 방향을 만들고
         Vector3 dir = h * Vector3.right + v * Vector3.up;
         // dir의 크기를 1로 만들고싶다.
