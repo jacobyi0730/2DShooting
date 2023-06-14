@@ -55,6 +55,8 @@ public class Enemy : MonoBehaviour
             {
                 // 너죽고 
                 Destroy(collision.gameObject);
+                // 게임오버UI를 활성화 하고싶다.
+                GameManager.instance.gameOverUI.SetActive(true);
             }
         }
         else
