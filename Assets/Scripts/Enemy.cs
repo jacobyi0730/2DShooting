@@ -49,9 +49,9 @@ public class Enemy : MonoBehaviour
             // collision에게 PlayerHP컴포넌트를 가져오고싶다.
             PlayerHP php = collision.gameObject.GetComponent<PlayerHP>();
             // 체력을 1 감소하고싶다.
-            php.SetHP(php.GetHP() - 1);
+            php.HP--;
 
-            if (php.GetHP() <= 0)
+            if (php.HP <= 0)
             {
                 // 너죽고 
                 Destroy(collision.gameObject);
