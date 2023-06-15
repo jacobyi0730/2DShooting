@@ -12,10 +12,14 @@ public class Enemy : MonoBehaviour
 {
     Vector3 dir;
     public float speed = 5;
-    
+
+    EnemyHP enemyHP; // cache
+
     // Start is called before the first frame update
     void Start()
     {
+        enemyHP = GetComponent<EnemyHP>();
+
         // 태어날 때 방향을 정하고싶다.
         // 30%의 확률로 플레이어 방향, 나머지 확률로 아래로 정하고싶다.
         int rValue = Random.Range(0, 10);
@@ -25,6 +29,7 @@ public class Enemy : MonoBehaviour
             GameObject target = GameObject.Find("Player");
             dir = target.transform.position - this.transform.position;
             dir.Normalize();
+            transform.up = -dir;
         }
         else
         {
@@ -64,19 +69,24 @@ public class Enemy : MonoBehaviour
             // 나 : Enemy, 너(collision) : Bullet
 
             // 너죽고 
-            Destroy(collision.gameObject);
+            Destroy(collision.gameObject); // Bullet
 
             // 점수를 1점 증가시키고싶다.
             // GameObject.Find를 이용해서 구현하세요.
-           
+
             ScoreManager.instance.SCORE++;
         }
-      
 
-        // 나죽자
-        Destroy(this.gameObject);
+        // enemyHP의 체력을 1 감소하고싶다.
+        enemyHP.HP--;
+        // 만약 체력이 0이하라면
+        if (enemyHP.HP <= 0)
+        {
+            // 나죽자 하고싶다.
+            Destroy(this.gameObject); // Enemy
+        }
 
-        //print(collision.gameObject.name);
+        
     }
 
 }

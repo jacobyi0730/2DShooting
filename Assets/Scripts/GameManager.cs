@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 // 태어날 때 GameOverUI를 비활성화 하고싶다.
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     }
 
     public GameObject gameOverUI;
+
     // Start is called before the first frame update
     void Start()
     {
