@@ -7,9 +7,10 @@ using Random = UnityEngine.Random;
 // 태어날 때 방향을 정하고싶다.
 // 30%의 확률로 플레이어 방향, 나머지 확률로 아래로 정하고싶다.
 // 살아가면서 그 방향으로 이동하고싶다.
-
+// 내(Enemy)가 파괴될 때 폭발공장에서 폭발을 만들어서 내위치에 배치하고싶다. 폭발은 2초 후에 파괴되게 하고싶다.
 public class Enemy : MonoBehaviour
 {
+    public GameObject explosionFactory;
     Vector3 dir;
     public float speed = 5;
 
@@ -84,9 +85,15 @@ public class Enemy : MonoBehaviour
         {
             // 나죽자 하고싶다.
             Destroy(this.gameObject); // Enemy
-        }
 
-        
+            // 내(Enemy)가 파괴될 때
+            // 1. 폭발공장에서 폭발을 만들어서
+            GameObject explosion = Instantiate(explosionFactory);
+            // 2. 내위치에 배치하고싶다.
+            explosion.transform.position = this.transform.position;
+            // 3. 폭발은 2초 후에 파괴되게 하고싶다.
+            Destroy(explosion, 2);
+        }
     }
 
 }
