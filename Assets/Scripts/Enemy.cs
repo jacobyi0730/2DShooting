@@ -70,7 +70,11 @@ public class Enemy : MonoBehaviour
             // 나 : Enemy, 너(collision) : Bullet
 
             // 너죽고 
-            Destroy(collision.gameObject); // Bullet
+            //Destroy(collision.gameObject); // Bullet
+            // 총알은 ObjectPool로 되어있으니 파괴하지않고 비활성화 한다.
+            collision.gameObject.SetActive(false);
+            // 비활성 목록에 다시 추가한다.
+            PlayerFire.deActiveBulletObjectPool.Add(collision.gameObject);
 
             // 점수를 1점 증가시키고싶다.
             // GameObject.Find를 이용해서 구현하세요.
