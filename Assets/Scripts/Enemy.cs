@@ -90,6 +90,9 @@ public class Enemy : MonoBehaviour
             // 나죽자 하고싶다.
             Destroy(this.gameObject); // Enemy
 
+            // 적이 파괴될 때 경험치를 1 획득하고싶다. UI에 표현하고싶다.
+            PlayerLevel.instance.EXP++;
+
             // 내(Enemy)가 파괴될 때
             // 1. 폭발공장에서 폭발을 만들어서
             GameObject explosion = Instantiate(explosionFactory);

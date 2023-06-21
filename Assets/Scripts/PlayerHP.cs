@@ -19,7 +19,7 @@ public class PlayerHP : MonoBehaviour
         // 태어날 때 체력을 최대 체력으로 하고싶다.
         // 그리고 화면에 표현하고싶다.
         sliderHP.maxValue = maxHP;
-        HP = 1;
+        HP = maxHP;
     }
 
     // GetHP와 SetHP를 Property로 교체해보세요!
