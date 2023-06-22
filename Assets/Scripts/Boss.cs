@@ -22,6 +22,7 @@ public class Boss : MonoBehaviour
     void Start()
     {
         state = MOVE;
+        moveTarget = GameObject.Find("BossTarget").transform;
     }
 
     // Update is called once per frame
@@ -101,5 +102,19 @@ public class Boss : MonoBehaviour
             state = ATTACK;
             currentTime = 0;
         }
+    }
+
+    //private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Bullet"))
+        {
+            // 총알은 ObjectPool로 되어있으니 파괴하지않고 비활성화 한다.
+            other.gameObject.SetActive(false);
+            // 비활성 목록에 다시 추가한다.
+            PlayerFire.deActiveBulletObjectPool.Add(other.gameObject);
+        }
+        // 나죽자
+        Destroy(this.gameObject);
     }
 }

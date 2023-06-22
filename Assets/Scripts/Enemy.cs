@@ -49,13 +49,17 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        int damage = 1;
+
         // 만약 부딪힌 상대방의 이름에 Player라는 문자열이 포함되어있다면
         if (collision.gameObject.name.Contains("Player"))
         {
+            damage = enemyHP.HP;
+
             // collision에게 PlayerHP컴포넌트를 가져오고싶다.
             PlayerHP php = collision.gameObject.GetComponent<PlayerHP>();
             // 체력을 1 감소하고싶다.
-            php.HP--;
+            php.HP -= damage;
 
             if (php.HP <= 0)
             {
@@ -83,7 +87,7 @@ public class Enemy : MonoBehaviour
         }
 
         // enemyHP의 체력을 1 감소하고싶다.
-        enemyHP.HP--;
+        enemyHP.HP -= damage;
         // 만약 체력이 0이하라면
         if (enemyHP.HP <= 0)
         {

@@ -38,10 +38,26 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    GameObject boss = null;
     // 강적공장에서 강적을 하나만 만들어지게 하고싶다.
     void UpdateBoss()
     {
-
+        // 1, 시간이 흐르다가
+        currtenTime += Time.deltaTime;
+        // 2. 만약 현재시간이 생성시간이되면
+        if (currtenTime > makeTime)
+        {
+            currtenTime = 0;
+            // 3. 만약 보스가 생성되어 있지 않다면
+            if (boss == null)
+            {
+                // 4. 보스공장에서 보스를 생성해서
+                GameObject bossFactory = Resources.Load<GameObject>("Boss");
+                boss = Instantiate(bossFactory);
+                // 5. 내위치에 배치하고싶다.
+                boss.transform.position = this.transform.position;
+            }
+        }
     }
 
     void UpdateNormal()
@@ -54,6 +70,14 @@ public class SpawnManager : MonoBehaviour
         // 2. 만약 현재시간이 생성시간이되면
         if (currtenTime > makeTime)
         {
+            // 2.1. 현재시간을 0으로 초기화 하고싶다.
+            currtenTime = 0;
+
+            // 만약 게임오버라면 아래의 일을 하지않게하고싶다.
+            if (true == GameManager.instance.gameOverUI.activeSelf)
+            {
+                return;
+            }
             // 3. 적 공장에서 적을 만들어서
             GameObject enemy = Instantiate(enemyFactory);
             // 4. Spawn목록중에 랜덤으로 정한 곳에 배치하고싶다.
@@ -74,8 +98,7 @@ public class SpawnManager : MonoBehaviour
             // 직전 인덱스에 현재 인덱스를 기억하고싶다.
             prevChooseIndex = chooseIndex;
             enemy.transform.position = spawnList[chooseIndex].transform.position;
-            // 5. 현재시간을 0으로 초기화 하고싶다.
-            currtenTime = 0;
+           
         }
 
     }
